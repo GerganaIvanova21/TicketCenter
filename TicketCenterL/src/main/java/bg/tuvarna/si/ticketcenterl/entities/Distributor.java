@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,5 +31,7 @@ public class Distributor extends User {
 
     @OneToMany(mappedBy = "distributor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Sell_Ticket> sellTickets;
+
+
 }
 

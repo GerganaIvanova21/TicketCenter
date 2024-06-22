@@ -25,4 +25,8 @@ public class Event_Type {
 
     @OneToMany(mappedBy = "eventType", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Event> eventsByIdEventType = new HashSet<>();
+
+    /*public void addEvent(Event event){
+        this.eventsByIdEventType.add(event);
+    }*/
 }

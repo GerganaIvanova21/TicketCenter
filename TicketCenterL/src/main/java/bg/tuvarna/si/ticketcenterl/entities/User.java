@@ -44,3 +44,5 @@ public abstract class User {
     @OneToMany(mappedBy = "userNotification", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Notification> notifications = new HashSet<>();
 }
+
+

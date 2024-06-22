@@ -23,7 +23,7 @@ public class Notification {
     private String message;
 
     @Basic
-    @Column(name = "senn")
+    @Column(name = "seen")
     private Boolean seen;
 
     @ManyToOne(fetch = FetchType.EAGER)

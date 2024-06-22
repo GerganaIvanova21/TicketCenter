@@ -1,0 +1,8 @@
+spring.application.name=TicketCenterL
+  
+  # application.properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/TicketCenter
+spring.datasource.username=postgres
+spring.datasource.password=Kyuubi279
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect

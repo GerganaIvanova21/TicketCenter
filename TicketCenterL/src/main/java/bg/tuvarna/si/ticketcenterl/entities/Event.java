@@ -64,4 +64,8 @@ public class Event {
     @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Sell_Ticket> sellTickets = new HashSet<>();
 
+    /*public void addSellTicket(Sell_Ticket ticket){
+        sellTickets.add(ticket);
+    }*/
+
 }

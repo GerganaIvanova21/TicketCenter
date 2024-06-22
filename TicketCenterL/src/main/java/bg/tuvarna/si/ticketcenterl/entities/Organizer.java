@@ -20,4 +20,6 @@ public class Organizer extends User {
 
     @OneToMany(mappedBy = "organizer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Event> events = new HashSet<>();
+
+
 }

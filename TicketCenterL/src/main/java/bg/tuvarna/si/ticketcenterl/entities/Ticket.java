@@ -26,11 +26,11 @@ public class Ticket {
 
     @Basic
     @Column(name = "free_seats")
-    private int free_seats;
+    private Integer free_seats;
 
     @Basic
     @Column(name = "occupied_seats")
-    private Double occupied_seats;
+    private Integer occupied_seats;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "event_type_id", nullable = false)
