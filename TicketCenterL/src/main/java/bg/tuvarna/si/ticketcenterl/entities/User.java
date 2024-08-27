@@ -19,6 +19,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Table(name = "User")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
 public abstract class User implements UserDetails {
     @Id

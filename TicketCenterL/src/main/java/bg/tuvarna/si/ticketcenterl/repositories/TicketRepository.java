@@ -6,10 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    Ticket findTicketByIdTicket(Long ticketId);
+public interface TicketRepository extends JpaRepository<Ticket, Integer> {
+    Ticket findTicketByIdTicket(Integer ticketId);
     Ticket findTicketByTicketType(String ticType);
-    List<Ticket> findByEventId(Long eventId);
+    List<Ticket> findByEventId(Integer eventId);
 
     //Ticket findTicketByTicketType(String ticketType, Event event);
 

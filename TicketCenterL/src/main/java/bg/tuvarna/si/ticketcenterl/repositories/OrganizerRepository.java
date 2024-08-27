@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface OrganizerRepository extends JpaRepository<Organizer, Long> {
-    Organizer findOrganizerById(Long organizerId);
+public interface OrganizerRepository extends JpaRepository<Organizer, Integer> {
+    Organizer findOrganizerById(Integer organizerId);
     List<Organizer>  getAllOrganizers();
 }

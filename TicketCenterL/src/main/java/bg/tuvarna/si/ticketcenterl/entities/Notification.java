@@ -27,6 +27,6 @@ public class Notification {
     private Boolean seen;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_ID", nullable = false)
     private User userNotification;
 }

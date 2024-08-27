@@ -47,7 +47,7 @@ public class Event {
     @Column(name = "status")
     private Boolean status;
 
-    @ManyToMany(mappedBy = "eventsByDistributor", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "eventsByDistributor", fetch = FetchType.LAZY)
     private Set<Distributor> distribEvent;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -55,17 +55,15 @@ public class Event {
     private Event_Type eventType;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_ID", nullable = false)
     private Organizer organizer;
 
-    @OneToMany(mappedBy = "eventsByEventIdEvent", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "eventsByEventIdEvent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Ticket> ticketByIdEvent = new HashSet<>();
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Sell_Ticket> sellTickets = new HashSet<>();
 
-    /*public void addSellTicket(Sell_Ticket ticket){
-        sellTickets.add(ticket);
-    }*/
+
 
 }

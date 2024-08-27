@@ -4,11 +4,11 @@ import bg.tuvarna.si.ticketcenterl.entities.Distributor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 @Repository
-public interface DistributorRepository extends JpaRepository<Distributor, Long> {
+public interface DistributorRepository extends JpaRepository<Distributor, Integer> {
     Distributor findDistributorByName(String distributorName);
 
-    Distributor findDistributorById(Long distributorId);
-    Distributor findByEventId(Long eventId);
+    Distributor findDistributorById(Integer distributorId);
+    Distributor findByEventId(Integer eventId);
 
     //List<Distributor> getAllDistributors();
 }

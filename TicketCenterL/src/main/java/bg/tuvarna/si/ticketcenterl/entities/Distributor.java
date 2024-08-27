@@ -26,8 +26,8 @@ public class Distributor extends User {
     private Double rating;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "Distributor_Event",joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    @JoinTable(name = "Distributor_Event",joinColumns = @JoinColumn(name = "user_ID"),
+            inverseJoinColumns = @JoinColumn(name = "event_ID"))
     private Set<Event> eventsByDistributor = new HashSet<>();
 
     @OneToMany(mappedBy = "distributor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

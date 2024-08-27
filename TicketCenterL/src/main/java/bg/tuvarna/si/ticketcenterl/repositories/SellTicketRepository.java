@@ -6,10 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface SellTicketRepository extends JpaRepository<Sell_Ticket, Long> {
-    Sell_Ticket findSell_TicketById(Long sellTicketId);
+public interface SellTicketRepository extends JpaRepository<Sell_Ticket, Integer> {
+    Sell_Ticket findSell_TicketById(Integer sellTicketId);
 
     //List<Sell_Ticket> getAllTickets();
 
-    List<Sell_Ticket> findByDistributorId(Long distributorId);
+    List<Sell_Ticket> findByDistributorId(Integer distributorId);
 }

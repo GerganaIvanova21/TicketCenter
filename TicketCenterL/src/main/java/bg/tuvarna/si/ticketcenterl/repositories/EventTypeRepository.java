@@ -4,8 +4,8 @@ import bg.tuvarna.si.ticketcenterl.entities.Event_Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 @Repository
-public interface EventTypeRepository extends JpaRepository<Event_Type, Long> {
-    Event_Type findEventTypeById(Long eventTypeId);
+public interface EventTypeRepository extends JpaRepository<Event_Type, Integer> {
+    Event_Type findEventTypeById(Integer eventTypeId);
 
     Event_Type findEventTypeByName(String eventTypeName);
 
