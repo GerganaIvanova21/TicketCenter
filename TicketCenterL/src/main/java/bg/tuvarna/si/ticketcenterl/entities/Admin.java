@@ -6,9 +6,6 @@ import lombok.*;
 
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
 @Entity
 @DiscriminatorValue(value = "admin")
 

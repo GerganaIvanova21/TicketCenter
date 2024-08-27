@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Setter
-@Table(name = "ticket_id", schema = "public", catalog = "TicketCenter")
+@Table(name = "Ticket", schema = "public", catalog = "TicketCenter")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
