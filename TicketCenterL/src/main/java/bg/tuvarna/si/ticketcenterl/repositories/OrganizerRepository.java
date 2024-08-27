@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface OrganizerRepository extends JpaRepository<Organizer, Long> {
     Organizer findOrganizerById(Long organizerId);
-    List<Organizer>  getAllDistributors();
+    List<Organizer>  getAllOrganizers();
 }

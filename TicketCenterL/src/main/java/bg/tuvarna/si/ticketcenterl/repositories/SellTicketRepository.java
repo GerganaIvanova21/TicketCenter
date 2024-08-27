@@ -9,5 +9,7 @@ import java.util.List;
 public interface SellTicketRepository extends JpaRepository<Sell_Ticket, Long> {
     Sell_Ticket findSell_TicketById(Long sellTicketId);
 
-    List<Sell_Ticket> getAllTickets();
+    //List<Sell_Ticket> getAllTickets();
+
+    List<Sell_Ticket> findByDistributorId(Long distributorId);
 }

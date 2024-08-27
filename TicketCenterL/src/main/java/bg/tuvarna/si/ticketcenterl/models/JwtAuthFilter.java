@@ -1,5 +1,5 @@
 package bg.tuvarna.si.ticketcenterl.models;
-
+/*
 import bg.tuvarna.si.ticketcenterl.services.JwtService;
 import bg.tuvarna.si.ticketcenterl.services.UserService;
 import jakarta.servlet.FilterChain;
@@ -40,3 +40,4 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
 
 }
+*/
