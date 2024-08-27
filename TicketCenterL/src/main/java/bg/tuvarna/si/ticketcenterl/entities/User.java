@@ -54,6 +54,15 @@ public abstract class User implements UserDetails {
         return List.of(() -> "role_" + role.name());
     }
 
+    public User(Integer userID, String firstName, String lastName, String email, String password, Role role) {
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     @Override
     public String getUsername(){
         return email;

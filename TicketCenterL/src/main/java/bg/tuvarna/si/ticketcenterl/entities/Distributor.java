@@ -1,5 +1,6 @@
 package bg.tuvarna.si.ticketcenterl.entities;
 
+import bg.tuvarna.si.ticketcenterl.type.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@DiscriminatorValue(value = "distributor")
+//@DiscriminatorValue(value = "distributor")
 
 public class Distributor extends User {
     @Basic
@@ -31,6 +32,12 @@ public class Distributor extends User {
 
     @OneToMany(mappedBy = "distributor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Sell_Ticket> sellTickets;
+
+    public Distributor(Integer id, String firstName, String lastName, String email, String password, Double honor, Double rating){
+        super(id, firstName, lastName, email, password, Role.Distributor);
+        this.honor = honor;
+        this.rating=rating;
+    }
 
 
 }

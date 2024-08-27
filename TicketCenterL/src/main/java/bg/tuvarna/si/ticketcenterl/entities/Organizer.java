@@ -1,5 +1,6 @@
 package bg.tuvarna.si.ticketcenterl.entities;
 
+import bg.tuvarna.si.ticketcenterl.type.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@DiscriminatorValue(value = "organizer")
+//@DiscriminatorValue(value = "organizer")
 public class Organizer extends User {
     @Basic
     @Column(name = "honor")
@@ -21,5 +22,9 @@ public class Organizer extends User {
     @OneToMany(mappedBy = "organizer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Event> events = new HashSet<>();
 
+    public Organizer(Integer id, String firstName, String lastName, String email, String password, Double honor){
+        super(id, firstName, lastName, email, password, Role.Distributor);
+        this.honor = honor;
+    }
 
 }
