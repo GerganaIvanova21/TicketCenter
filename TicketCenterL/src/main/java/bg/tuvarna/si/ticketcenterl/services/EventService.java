@@ -1,23 +1,45 @@
 package bg.tuvarna.si.ticketcenterl.services;
 
-import bg.tuvarna.si.ticketcenterl.entities.*;
-import bg.tuvarna.si.ticketcenterl.repositories.DistributorRepository;
+import bg.tuvarna.si.ticketcenterl.entities.Event;
 import bg.tuvarna.si.ticketcenterl.repositories.EventRepository;
-import bg.tuvarna.si.ticketcenterl.repositories.OrganizerRepository;
-import bg.tuvarna.si.ticketcenterl.repositories.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @ReadingConverter
 public class EventService {
+    @Autowired
+    private final EventRepository eventRepository;
+
+    private Event findEventById(Integer id){
+        return eventRepository.findEventById(id);
+    }
+
+    private List<Event> findEventByName(String name){
+        return eventRepository.findEventByName(name);
+    }
+    private List<Event> findEventByDate(LocalDate date){
+        return eventRepository.findEventByDate(date);
+    }
+
+    private List<Event> findEventByPlace(String place){
+        return eventRepository.findEventByPlace(place);
+    }
+
+    private List<Event> findEventByStatus(Boolean status){
+        return eventRepository.findEventByStatus(status);
+    }
+    private List<Event> findAllEvents(){
+        return eventRepository.findAll();
+    }
+
+    /*
     @Autowired
     private EventRepository eventRepository;
 

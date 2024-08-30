@@ -1,16 +1,13 @@
 package bg.tuvarna.si.ticketcenterl.services;
 
 import bg.tuvarna.si.ticketcenterl.entities.Sell_Ticket;
-import bg.tuvarna.si.ticketcenterl.entities.Ticket;
 import bg.tuvarna.si.ticketcenterl.repositories.SellTicketRepository;
-import bg.tuvarna.si.ticketcenterl.repositories.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +16,23 @@ public class SellTicketService {
     @Autowired
     private SellTicketRepository sellTicketRepository;
 
+    private Sell_Ticket findSellTicketById(Integer id){
+        return sellTicketRepository.findSellTicketById(id);
+    }
+
+    private List<Sell_Ticket> findAllSellTickets(){
+        return sellTicketRepository.findAll();
+    }
+
+    private List<Sell_Ticket> findSellTicketByCustomerName(String cusName){
+        return sellTicketRepository.findSellTicketByCustomerName(cusName);
+    }
+
+    private void deleteSellTicket(Integer id){
+        sellTicketRepository.deleteById(id);
+    }
+
+    /*
     @Autowired
     private TicketRepository ticketRepository;
 
@@ -65,7 +79,7 @@ public class SellTicketService {
         return availableCount;
     }
 
-
+*/
 
 
 

@@ -1,11 +1,7 @@
 package bg.tuvarna.si.ticketcenterl.services;
 
 import bg.tuvarna.si.ticketcenterl.entities.Distributor;
-import bg.tuvarna.si.ticketcenterl.entities.Event;
-import bg.tuvarna.si.ticketcenterl.entities.Sell_Ticket;
 import bg.tuvarna.si.ticketcenterl.repositories.DistributorRepository;
-import bg.tuvarna.si.ticketcenterl.repositories.EventRepository;
-import bg.tuvarna.si.ticketcenterl.repositories.SellTicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.convert.ReadingConverter;
@@ -18,6 +14,33 @@ import java.util.List;
 @ReadingConverter
 public class DistributorService {
     @Autowired
+    private final DistributorRepository distributorRepository;
+
+    private Distributor createDistributor(Distributor distributor){
+        return distributorRepository.save(distributor);
+    }
+
+    private List<Distributor> findAllDistributors(){
+        return distributorRepository.findAll();
+    }
+
+    private Distributor findDistributorById(Integer id){
+        return distributorRepository.findDistributorById(id);
+    }
+
+    private List<Distributor> findDistributorByName(String fName, String lName){
+        return distributorRepository.findDistributorByName(fName, lName);
+    }
+
+    private List<Distributor> findDistributorByEvent(Integer id){
+        return distributorRepository.findDistributorByEvent(id);
+    }
+
+    private void deleteDistributor(Integer id){
+        distributorRepository.deleteById(id);
+    }
+
+    /*@Autowired
     private DistributorRepository distributorRepository;
 
     @Autowired
@@ -45,5 +68,5 @@ public class DistributorService {
 
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
-    }
+    }*/
 }

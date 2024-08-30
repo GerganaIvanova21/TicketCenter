@@ -16,6 +16,23 @@ public class EventTypeService {
     @Autowired
     private EventTypeRepository eventTypeRepository;
 
+    private Event_Type findEventTypeById(Integer id){
+        return eventTypeRepository.findEventTypeById(id);
+    }
+
+    private List<Event_Type> findAllEventTypes(){
+        return eventTypeRepository.findAll();
+    }
+
+    private List<Event_Type> findEventTypeByName(String name){
+        return eventTypeRepository.findEventTypeByName(name);
+    }
+
+    private void deleteEventType(Integer id){
+        eventTypeRepository.deleteById(id);
+    }
+    /*
+
     public Event_Type createEventType(Event_Type eventType) {
         return eventTypeRepository.save(eventType);
     }
@@ -35,4 +52,6 @@ public class EventTypeService {
     public Event_Type getEventTypeByName(String name) {
         return eventTypeRepository.findEventTypeByName(name);
     }
+
+     */
 }

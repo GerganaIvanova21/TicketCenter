@@ -1,26 +1,25 @@
 package bg.tuvarna.si.ticketcenterl.services;
 
-import bg.tuvarna.si.ticketcenterl.entities.Distributor;
-import bg.tuvarna.si.ticketcenterl.entities.Organizer;
-import bg.tuvarna.si.ticketcenterl.repositories.DistributorRepository;
-import bg.tuvarna.si.ticketcenterl.repositories.OrganizerRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @ReadingConverter
+@Transactional
 public class AdminService {
+
+
+
+    /*
     @Autowired
     private OrganizerRepository organizerRepository;
 
     @Autowired
     private DistributorRepository distributorRepository;
+
 
 
     public Organizer createOrganizer(Organizer organizer) {
@@ -76,5 +75,5 @@ public class AdminService {
 
     public List<Distributor> getAllDistributors() {
         return distributorRepository.findAll();
-    }
+    }*/
 }

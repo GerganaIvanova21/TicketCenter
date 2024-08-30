@@ -16,7 +16,23 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
+    private Ticket findTicketById(Integer id){
+        return ticketRepository.findTicketByIdTicket(id);
+    }
 
+    private List<Ticket> findAllTickets(){
+        return ticketRepository.findAll();
+    }
+
+    private List<Ticket> findTicketByTicketType(String ticType){
+        return ticketRepository.findTicketByTicketType(ticType);
+    }
+
+    private void deleteTicket(Integer id){
+        ticketRepository.deleteById(id);
+    }
+
+/*
     public Ticket getTicketByType(String ticType) {
         return ticketRepository.findTicketByTicketType(ticType);
     }
@@ -27,5 +43,5 @@ public class TicketService {
 
     public List<Ticket> getAllTickets(){
         return ticketRepository.findAll();
-    }
+    }*/
 }
