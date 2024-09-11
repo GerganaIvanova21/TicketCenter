@@ -7,13 +7,12 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Builder
+
 @NoArgsConstructor
-@AllArgsConstructor
 @Setter
 @Getter
 @Entity
-//@DiscriminatorValue(value = "organizer")
+@DiscriminatorValue(value = "Organizer")
 public class Organizer extends User {
     @Basic
     @Column(name = "honor")
@@ -22,8 +21,9 @@ public class Organizer extends User {
     @OneToMany(mappedBy = "organizer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Event> events = new HashSet<>();
 
+    @Builder
     public Organizer(Integer id, String firstName, String lastName, String email, String password, Double honor){
-        super(id, firstName, lastName, email, password, Role.Distributor);
+        super(id, firstName, lastName, email, password, Role.Organizer);
         this.honor = honor;
     }
 

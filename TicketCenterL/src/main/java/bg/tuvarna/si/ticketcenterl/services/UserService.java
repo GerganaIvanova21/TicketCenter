@@ -16,7 +16,7 @@ public class UserService   {
     private final UserRepository userRepository;
     public UserResponse getUserByEmail(String email){
         User user = userRepository.findByEmail(email).get();
-        return new UserResponse(user.getUserID(),user.getFirstName(), user.getLastName(), user.getEmail());
+        return new UserResponse(user.getId(),user.getFirstName(), user.getLastName(), user.getEmail());
     }
 
     public UserDataResponse getUserData(String name){

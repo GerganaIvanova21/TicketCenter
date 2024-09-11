@@ -2,43 +2,54 @@ package bg.tuvarna.si.ticketcenterl.services;
 
 import bg.tuvarna.si.ticketcenterl.entities.Distributor;
 import bg.tuvarna.si.ticketcenterl.repositories.DistributorRepository;
+import bg.tuvarna.si.ticketcenterl.repositories.SellTicketRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @ReadingConverter
-public class DistributorService {
-    @Autowired
+public class DistributorServiceImpl {
     private final DistributorRepository distributorRepository;
+    private final SellTicketRepository sellTicketRepository;
 
-    private Distributor createDistributor(Distributor distributor){
-        return distributorRepository.save(distributor);
+    public double calculateRatingBySoldTickets(Integer distributorId){
+        int ticketsSoldByDistributor = sellTicketRepository.countTicketsSoldByDistributorId(distributorId);
+
+        int minSoldTickets= sellTicketRepository.findMinTicketsSold();
+        int maxSoldTickets = sellTicketRepository.findMaxTicketsSold();
+
+        return rating(ticketsSoldByDistributor, minSoldTickets, maxSoldTickets);
     }
 
-    private List<Distributor> findAllDistributors(){
+    private double rating(int soldTickets, int minSoldTickets, int maxSoldTickets){
+        if(maxSoldTickets == maxSoldTickets){  //при еднакъв брой продадени билети
+            return 5.0;
+        }
+        return 1 + (double) (soldTickets - minSoldTickets) / (maxSoldTickets - minSoldTickets)*4;
+    }
+
+    public List<Distributor> findAllDistributors(){
         return distributorRepository.findAll();
     }
 
-    private Distributor findDistributorById(Integer id){
+    public Optional<Distributor> findDistributorById(Integer id){
         return distributorRepository.findDistributorById(id);
     }
 
-    private List<Distributor> findDistributorByName(String fName, String lName){
-        return distributorRepository.findDistributorByName(fName, lName);
+    public List<Distributor> findDistributorByName(String firstName, String lastName){
+        return distributorRepository.findDistributorByFirstNameAndLastName(firstName, lastName);
     }
 
-    private List<Distributor> findDistributorByEvent(Integer id){
-        return distributorRepository.findDistributorByEvent(id);
+    public List<Distributor> findDistributorByEvent(Integer eventID){
+        return distributorRepository.findByEventsByDistributor_EventId(eventID);
     }
 
-    private void deleteDistributor(Integer id){
-        distributorRepository.deleteById(id);
-    }
+
 
     /*@Autowired
     private DistributorRepository distributorRepository;

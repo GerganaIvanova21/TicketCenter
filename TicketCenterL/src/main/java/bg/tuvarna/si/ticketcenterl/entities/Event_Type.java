@@ -17,11 +17,11 @@ public class Event_Type {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_ID")
-    private int idType;
+    private int eventTypeId;
 
     @Basic
     @Column(name = "event_type")
-    private String event_type;
+    private String eventTypeName;
 
     @OneToMany(mappedBy = "eventType", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Event> eventsByIdEventType = new HashSet<>();

@@ -5,11 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface OrganizerRepository extends JpaRepository<Organizer, Integer> {
-    Organizer findOrganizerById(Integer organizerId);
+    Optional<Organizer> findOrganizerById(Integer id);
 
-    List<Organizer> findOrganizerByName(String firstName, String lastName);
+    List<Organizer> findOrganizerByFirstNameAndLastName(String firstName, String lastName);
 
 
 }

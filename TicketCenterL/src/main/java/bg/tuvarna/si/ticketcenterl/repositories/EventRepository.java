@@ -6,9 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
-    Event findEventById(Integer eventId);
+    Optional<Event> findEventByEventId(Integer eventId);
 
     List<Event> findEventByName(String name);
 
@@ -23,6 +25,10 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     List<Event> findEventByOrganizerId(Integer organizerID);
 
     //търсене на събитие по тип
-    List<Event> findEventByEventTypeID(Integer eventTypeID);
+
+    //List<Event> findEventByEventType(Integer eventTypeID);
+
+    //@Query("SELECT e FROM Event e WHERE e.eventType.eventTypeId = :eventTypeId")
+    List<Event> findByEventType_EventTypeId(Integer eventTypeId);
 
 }

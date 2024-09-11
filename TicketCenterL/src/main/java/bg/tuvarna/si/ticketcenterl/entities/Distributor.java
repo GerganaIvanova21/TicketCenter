@@ -7,14 +7,11 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Setter
 @Getter
 @Entity
-//@DiscriminatorValue(value = "distributor")
+@DiscriminatorValue(value = "Distributor")
 
 public class Distributor extends User {
     @Basic
@@ -33,6 +30,7 @@ public class Distributor extends User {
     @OneToMany(mappedBy = "distributor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Sell_Ticket> sellTickets;
 
+    @Builder
     public Distributor(Integer id, String firstName, String lastName, String email, String password, Double honor, Double rating){
         super(id, firstName, lastName, email, password, Role.Distributor);
         this.honor = honor;

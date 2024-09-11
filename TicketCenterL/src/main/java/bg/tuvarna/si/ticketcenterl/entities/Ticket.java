@@ -14,11 +14,11 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ticket_id")
-    private int idTicket;
+    private int ticketId;
 
     @Basic
     @Column(name = "type_tic")
-    private String type_tic;
+    private String ticketType;
 
     @Basic
     @Column(name = "price")
@@ -33,6 +33,11 @@ public class Ticket {
     private Integer occupied_seats;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "event_type_id", nullable = false)
-    private Event eventByEventIdEvent;
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
+
+    public String getEventType(){
+        return event.getEventType().getEventTypeName();
+    }
+
 }

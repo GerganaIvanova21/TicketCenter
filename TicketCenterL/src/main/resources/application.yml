@@ -1,4 +1,13 @@
+server:
+  port: 8081
+  address: 192.168.93.202
+
+
 spring:
+  app:
+    jwtSecret: ni24g6hk5ba5a65a6x6s2c6c6s2
+    jwtExpirationMs: 36000000
+
   datasource:
     url: jdbc:postgresql://localhost:5432/TicketCenter
     username: postgres
@@ -15,6 +24,4 @@ spring:
         database: postgres
         database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-    server:
-      port: 8081
-      address: 192.168.91.202
+

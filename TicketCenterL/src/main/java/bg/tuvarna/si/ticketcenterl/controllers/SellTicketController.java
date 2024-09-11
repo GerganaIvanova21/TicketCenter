@@ -1,14 +1,61 @@
 package bg.tuvarna.si.ticketcenterl.controllers;
 
 import bg.tuvarna.si.ticketcenterl.entities.Sell_Ticket;
-import bg.tuvarna.si.ticketcenterl.services.SellTicketService;
-import org.springframework.beans.factory.annotation.Autowired;
+import bg.tuvarna.si.ticketcenterl.services.SellTicketServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
-@RequestMapping("/sell-tickets")
+@RequestMapping("/api/sell-tickets")
+@RequiredArgsConstructor
 public class SellTicketController {
+    //@Autowired
+    private final SellTicketServiceImpl sellTicketService;
+
+    @PostMapping
+    public ResponseEntity<Sell_Ticket> sellTicket(
+            @RequestParam Integer ticketId,
+            @RequestParam Integer distributorId,
+            @RequestParam String customerName,
+            @RequestParam Integer count){
+        try {
+            Sell_Ticket sellTicket = sellTicketService.sellTicket(ticketId,distributorId, customerName, count);
+            return ResponseEntity.status(HttpStatus.CREATED).body(sellTicket);
+        }
+        catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Sell_Ticket> findSellTicketById(@PathVariable Integer id){
+        return sellTicketService.findSellTicketById(id);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Sell_Ticket>> findAllSellTickets(){
+        List<Sell_Ticket> sellTickets = sellTicketService.findAllSellTickets();
+        return ResponseEntity.ok(sellTickets);
+    }
+
+    @GetMapping("/sell-customer")
+    public ResponseEntity<List<Sell_Ticket>> findSellTicketByCustomerName(@RequestParam String cusName){
+        List<Sell_Ticket> sellTickets = sellTicketService.findSellTicketByCustomerName(cusName);
+        return ResponseEntity.ok(sellTickets);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteSellTicket(@PathVariable Integer id){
+        sellTicketService.deleteSellTicket(id);
+    }
+
+
+    /*
 
     @Autowired
     private SellTicketService sellTicketService;
@@ -33,5 +80,5 @@ public class SellTicketController {
     public ResponseEntity<Long> getAvailableTicketCount(@PathVariable Long eventId) {
         long availableCount = sellTicketService.getAvailableTicketCount(eventId);
         return ResponseEntity.ok(availableCount);
-    }
+    }*/
 }

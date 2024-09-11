@@ -3,32 +3,37 @@ package bg.tuvarna.si.ticketcenterl.services;
 import bg.tuvarna.si.ticketcenterl.entities.Event_Type;
 import bg.tuvarna.si.ticketcenterl.repositories.EventTypeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @ReadingConverter
 public class EventTypeService {
-    @Autowired
-    private EventTypeRepository eventTypeRepository;
 
-    private Event_Type findEventTypeById(Integer id){
-        return eventTypeRepository.findEventTypeById(id);
+    //@Autowired
+    private final EventTypeRepository eventTypeRepository;
+
+    public Event_Type creteEventType(Event_Type eventType){
+        return eventTypeRepository.save(eventType);
     }
 
-    private List<Event_Type> findAllEventTypes(){
+    public Optional<Event_Type> findEventTypeById(Integer id){
+        return eventTypeRepository.findEventTypeByEventTypeId(id);
+    }
+
+    public List<Event_Type> findAllEventTypes(){
         return eventTypeRepository.findAll();
     }
 
-    private List<Event_Type> findEventTypeByName(String name){
-        return eventTypeRepository.findEventTypeByName(name);
+    public List<Event_Type> findEventTypeByName(String eventTypeName){
+        return eventTypeRepository.findEventTypeByEventTypeName(eventTypeName);
     }
 
-    private void deleteEventType(Integer id){
+    public void deleteEventType(Integer id){
         eventTypeRepository.deleteById(id);
     }
     /*

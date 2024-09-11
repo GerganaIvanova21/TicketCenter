@@ -21,7 +21,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_ID")
-    private int idEvent;
+    private int eventId;
 
     @Basic
     @Column(name="name")
@@ -58,11 +58,19 @@ public class Event {
     @JoinColumn(name = "user_ID", nullable = false)
     private Organizer organizer;
 
-    @OneToMany(mappedBy = "eventsByEventIdEvent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    /*@OneToMany(mappedBy = "eventsByEventIdEvent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Ticket> ticketByIdEvent = new HashSet<>();
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Sell_Ticket> sellTickets = new HashSet<>();*/
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Ticket> tickets = new HashSet<>();
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Sell_Ticket> sellTickets = new HashSet<>();
+
+
 
 
 

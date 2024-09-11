@@ -3,41 +3,51 @@ package bg.tuvarna.si.ticketcenterl.services;
 import bg.tuvarna.si.ticketcenterl.entities.Event;
 import bg.tuvarna.si.ticketcenterl.repositories.EventRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @ReadingConverter
 public class EventService {
-    @Autowired
+
     private final EventRepository eventRepository;
 
-    private Event findEventById(Integer id){
-        return eventRepository.findEventById(id);
+    public Optional<Event> findEventById(Integer id){
+        return eventRepository.findEventByEventId(id);
     }
 
-    private List<Event> findEventByName(String name){
+    public List<Event> findEventByName(String name){
         return eventRepository.findEventByName(name);
     }
-    private List<Event> findEventByDate(LocalDate date){
+    public List<Event> findEventByDate(LocalDate date){
         return eventRepository.findEventByDate(date);
     }
 
-    private List<Event> findEventByPlace(String place){
+    public List<Event> findEventByPlace(String place){
         return eventRepository.findEventByPlace(place);
     }
 
-    private List<Event> findEventByStatus(Boolean status){
+    public List<Event> findEventByStatus(Boolean status){
         return eventRepository.findEventByStatus(status);
     }
-    private List<Event> findAllEvents(){
+    public List<Event> findAllEvents(){
         return eventRepository.findAll();
     }
+
+    public List<Event> findEventByOrganizerId(Integer organizerId){
+        return eventRepository.findEventByOrganizerId(organizerId);
+    }
+
+    public List<Event> findEventByEventTypeID(Integer eventTypeId) {
+        return eventRepository.findByEventType_EventTypeId(eventTypeId);
+    }
+
+
 
     /*
     @Autowired

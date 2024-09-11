@@ -12,7 +12,7 @@ import lombok.*;
 public class Sell_Ticket {
     @Id
     @Column(name = "sell_id")
-    private int idSellTicket;
+    private int sellTicketId;
 
     @Basic
     @Column(name = "count")
@@ -29,5 +29,10 @@ public class Sell_Ticket {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private Distributor distributor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
+
 
 }

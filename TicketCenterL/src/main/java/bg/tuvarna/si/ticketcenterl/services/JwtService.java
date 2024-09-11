@@ -1,14 +1,9 @@
 package bg.tuvarna.si.ticketcenterl.services;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,27 +11,10 @@ import java.util.function.Function;
 
 @Component
 public class JwtService {
-    public static final String SECRET = "25142526584569745HRV422kMN89DEF254OU";
-    public String generateToken(String email){
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, email);
-    }
+    public static String jwtSecret = "ni24g6hk5ba5a65a6x6s2c6c6s2";
+    private static int jwtExpirationMs = 36000000;
 
-    private String createToken(Map<String, Object>claims, String email){
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(email)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() +1000 * 60 * 30))
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
-    }
-
-    private Key getSignKey(){
-        byte [] keyBytes = Decoders.BASE64.decode(SECRET);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
-
-    public String extractEmail(String token){
+    public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -50,20 +28,53 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token){
-        return Jwts
-                .parser()
-                .setSigningKey(getSignKey())
-                .build()
-                .parseClaimsJwt(token)
-                .getBody();
+        Claims claims=null;
+        try{
+            claims = Jwts.parser()
+                    .setSigningKey(jwtSecret.getBytes())  // Using secretKey directly
+                    .parseClaimsJws(token)  // Correct method to parse JWS tokens
+                    .getBody();
+        }
+        catch (ExpiredJwtException e){
+            throw new RuntimeException(e);
+        }
+        catch (UnsupportedJwtException e){
+            throw new RuntimeException(e);
+        }
+        catch (MalformedJwtException e){
+            throw new RuntimeException(e);
+        }
+        catch (IllegalArgumentException e){
+            throw new RuntimeException(e);
+        }
+        return claims;
     }
-
     private Boolean isTokenExpired(String token){
         return extractExpiration(token).before(new Date());
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails){
-        final String email = extractEmail(token);
-        return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));
+
+    public String generateToken(UserDetails userDetails){
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, userDetails.getUsername());
+    }
+
+    public String generateRefreshToken(UserDetails userDetails){
+        return createToken(new HashMap<>(),userDetails.getUsername());
+    }
+
+    private String createToken(Map<String, Object>claims, String subject){
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
+                .signWith(SignatureAlgorithm.HS256, jwtSecret).compact();
+    }
+
+
+    public Boolean isTokenValid(String token, UserDetails userDetails){
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 }

@@ -12,20 +12,18 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-@Builder
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Entity
-@Setter
-@Getter
 @Table(name = "User")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 
 public abstract class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_ID")
-    private Integer userID;
+    private Integer id;
 
     @Basic
     @Column(name = "fName")
@@ -44,6 +42,7 @@ public abstract class User implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "role", insertable = false, updatable = false)
     private Role role;
 
 
@@ -55,8 +54,8 @@ public abstract class User implements UserDetails {
         return List.of(() -> "role_" + role.name());
     }
 
-    public User(Integer userID, String firstName, String lastName, String email, String password, Role role) {
-        this.userID = userID;
+    public User(Integer id, String firstName, String lastName, String email, String password, Role role) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
